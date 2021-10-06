@@ -10,33 +10,53 @@ namespace json_test
         {
 
             Fighter f1 = new Fighter();
+            string healthChosen = null; 
 
-            Console.WriteLine("Choose name");
+            if(File.Exists(@"FighterJSon")){
 
-           f1.Name =  Console.ReadLine();
+            }
+            else{
+                 Console.WriteLine("Choose name");
 
-           Console.WriteLine("Write what weapon they use");
+                 f1.Name =  Console.ReadLine();
 
-           f1.WeaponUsed = Console.ReadLine();
+                Console.WriteLine("Write what weapon they use");
+
+                f1.WeaponUsed = Console.ReadLine();
            
-           System.Console.WriteLine("What's their hp?");
+                System.Console.WriteLine("What's their hp?");
 
-           string healthChosen = Console.ReadLine();
+                 healthChosen = Console.ReadLine();
 
-           bool tryParse = int.TryParse(healthChosen, out int healthInt);
+                 bool tryParse = int.TryParse(healthChosen, out int healthInt);
 
-           while(tryParse != true){
-               System.Console.WriteLine("not a number. Write again");
+                     while(tryParse != true){
+                        System.Console.WriteLine("not a number. Write again");
 
-               healthChosen = Console.ReadLine();
-               tryParse = int.TryParse(healthChosen, out  healthInt);
-           }
+                        healthChosen = Console.ReadLine();
+                        tryParse = int.TryParse(healthChosen, out  healthInt);
+                         f1.Health = healthInt; 
+                    }
+
+            }
+
+            
             
 
-            f1.Health = healthInt; 
+           
+
+           
+           
+            
+
+
 
             string jsonFile = JsonSerializer.Serialize<Fighter>(f1);
 
+            File.WriteAllText(@"FighterJson.json", jsonFile);
+
+            Console.ReadLine();
+            
             
 
         }
